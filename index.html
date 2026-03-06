@@ -35,9 +35,10 @@ body.h-hover #cur-ring{width:56px;height:56px;border-color:var(--c4);opacity:1}
 /* ══ NAV ════════════════════════════════════════════════ */
 nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.2rem 5rem;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
 nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid rgba(123,79,212,.18);box-shadow:0 8px 60px rgba(0,0,0,.6)}
-.logo{font-family:'Montserrat',sans-serif;font-size:2.3rem;letter-spacing:3px;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(0,212,200,.6));position:relative;z-index:1001}
-.desktop-nav{display:flex;gap:3rem;list-style:none}
-.desktop-nav a{color:rgba(238,238,255,.65);text-decoration:none;font-size:1.25rem;letter-spacing:2px;font-family:'Montserrat';position:relative;transition:color .3s}
+.logo{font-family:'Montserrat',sans-serif;font-size:2rem;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(0,212,200,.6));position:relative;z-index:1001; font-weight: 800;}
+.desktop-nav{display:flex;gap:2.2rem;list-style:none}
+.desktop-nav a{color:rgba(238,238,255,.65);text-decoration:none;font-size:1rem;letter-spacing:2px;font-family:'Montserrat';position:relative;transition:color .3s; text-transform: uppercase;
+    font-weight: 600;}
 .desktop-nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--g1);box-shadow:0 0 12px var(--gt);transition:width .35s}
 .desktop-nav a:hover{color:#fff}
 .desktop-nav a:hover::after{width:100%}
@@ -68,13 +69,13 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
 
 /* Giant hero text */
-.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(4rem,13vw,82px);line-height:.88;letter-spacing:3px;margin-bottom:0.5rem; font-weight: 900;}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(4rem,13vw,82px);line-height:1.1;letter-spacing:3px;margin-bottom:0.7rem; font-weight: 900;}
 .h-line1{display:block;color:rgba(238,238,255,.9)}
 .h-line2{display:block;background:linear-gradient(90deg,#A8F060 0%,#22D3A5 14%,#00D4C8 30%,#7B4FD4 52%,#9B59F5 68%,#00D4C8 84%,#A8F060 100%);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradFlow 3.5s linear infinite;filter:drop-shadow(0 0 50px rgba(0,212,200,.5))}
 @keyframes gradFlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 
 /* Typewriter sub */
-.hero-sub{font-size:1.15rem;color:var(--muted);max-width:975px;margin-bottom:2rem;line-height:2;min-height:3.5rem}
+.hero-sub{font-size:1.4rem;color:var(--muted);max-width:1250px;margin-bottom:2.2rem;line-height:2;min-height:3.5rem}
 #typewriter{color:var(--c2);font-weight:500}
 #typewriter::after{content:'|';animation:cursorBlink .75s step-end infinite;color:var(--c2)}
 @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
@@ -121,7 +122,7 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 .section-badge::before{content:'';width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--c2))}
 .section-badge::after{content:'';width:30px;height:1px;background:linear-gradient(90deg,var(--c2),transparent)}
 
-.about-text h2{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,5vw,5.5rem);letter-spacing:3px;line-height:.95;margin-bottom:2rem}
+.about-text h2{font-family:'Montserrat',sans-serif;font-size:clamp(3rem,5vw,70px);letter-spacing:3px;line-height:.95;margin-bottom:2rem;font-weight: 900;text-transform: uppercase;}
 .about-text p{font-size:1.08rem;line-height:2;margin-bottom:1.5rem;color:rgba(238,238,255,.68)}
 
 /* Glowing photo frame */
@@ -133,13 +134,14 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 
 /* Floating cards */
 .float-card{position:absolute;z-index:3;background:rgba(4,4,18,.92);border:1px solid rgba(0,212,200,.3);backdrop-filter:blur(20px);border-radius:18px;padding:1.1rem 1.5rem;box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 30px rgba(0,212,200,.1)}
-.float-card.f1{top:2.5rem;left:-3rem;animation:floatY 5s ease-in-out infinite}
-.float-card.f2{bottom:3rem;right:-3rem;animation:floatY 5s ease-in-out infinite .8s}
-.fc-num{font-family:'Montserrat';font-size:2.2rem;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(0,212,200,.6));line-height:1}
+.float-card.f1{top:2.5rem;left:-3rem;animation:floatY 5s ease-in-out infinite; text-align: center;}
+.float-card.f2{bottom:3rem;right:-3rem; text-align:center; animation:floatY 5s ease-in-out infinite .8s}
+.fc-num{font-family:'Montserrat';font-size:2.2rem;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(0,212,200,.6));line-height:1;font-weight: 800;}
 .fc-lbl{font-size:.7rem;letter-spacing:2px;opacity:.5;margin-top:.1rem}
 
 .skills{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem}
-.skill-tag{padding:.5rem 1.3rem;background:rgba(123,79,212,.09);border:1px solid rgba(123,79,212,.28);border-radius:30px;font-size: 1.1rem;letter-spacing:1px;font-family:'Montserrat';cursor:default;transition:all .3s;position:relative;overflow:hidden}
+.skill-tag{padding:.5rem 1.3rem;background:rgba(123,79,212,.09);border:1px solid rgba(123,79,212,.28);border-radius:30px;font-size: 0.7rem;letter-spacing:1px;font-family:'Montserrat';cursor:default;transition:all .3s;position:relative;overflow:hidden;font-weight: 700;
+    text-transform: uppercase;}
 .skill-tag::before{content:'';position:absolute;inset:0;background:var(--g1);opacity:0;transition:opacity .3s}
 .skill-tag:hover{border-color:var(--c2);box-shadow:0 0 22px rgba(0,212,200,.25);transform:translateY(-3px) scale(1.06)}
 .skill-tag:hover::before{opacity:.14}
@@ -151,11 +153,11 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
     flex-direction: column;}
 .projects-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--g3);box-shadow:0 0 28px rgba(0,212,200,.35)}
 
-.section-title{font-family:'Montserrat';font-size:clamp(3rem,7vw,6rem);text-align:center;margin-bottom:.4rem;letter-spacing:5px}
+.section-title{font-family:'Montserrat';font-size:clamp(3rem,5vw,70px);text-align:center;margin-bottom:.4rem;letter-spacing:5px;font-weight: 900;text-transform: uppercase;}
 
 /* Tabs */
 .tabs-wrapper{display:flex;justify-content:center;gap:.8rem;margin-bottom:4rem;flex-wrap:wrap}
-.tab-btn{font-family:'Montserrat';font-size:1.1rem;letter-spacing:3px;padding:.8rem 2.4rem;border-radius:50px;cursor:none;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(238,238,255,.5);transition:all .35s;position:relative;overflow:hidden}
+.tab-btn{font-family:'Montserrat';font-size:1rem;padding:.8rem 2.4rem;border-radius:50px;cursor:none;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(238,238,255,.5);transition:all .35s;position:relative;overflow:hidden; font-weight: 700; text-transform: uppercase;}
 .tab-btn::before{content:'';position:absolute;inset:0;border-radius:50px;background:var(--g1);opacity:0;transition:opacity .35s}
 .tab-btn span{position:relative;z-index:1}
 .tab-btn:hover{border-color:rgba(0,212,200,.35);color:#fff}
@@ -195,9 +197,10 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 .project-status-badge.inactive .status-dot{background:var(--c1)}
 
 .project-info{padding:1.4rem 1.8rem 1.8rem;display:flex;flex-direction:column;gap:.8rem;flex:1}
-.project-info h3{font-family:'Montserrat';font-size:2rem;letter-spacing:2px;line-height:1;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.project-info h3{font-family:'Montserrat';font-size:1.6rem; line-height: 32px; font-weight: 800; text-transform:uppercase; background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-.visit-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.4rem;border-radius:30px;margin-top:auto;background:var(--g1);color:#fff;text-decoration:none;font-family:'Montserrat';font-size:.92rem;letter-spacing:2px;transition:all .3s;width:fit-content;box-shadow:0 4px 24px var(--gp);position:relative;overflow:hidden}
+.visit-btn{display:inline-flex; text-transform: uppercase;
+    font-weight: 700; align-items:center;gap:.5rem;padding:.5rem 1.4rem;border-radius:8px;margin-top:auto;background:var(--g1);color:#fff;text-decoration:none;font-family:'Montserrat';font-size:.80rem; transition:all .3s;width:fit-content;box-shadow:0 4px 24px var(--gp);position:relative;overflow:hidden}
 .visit-btn::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s}
 .visit-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px var(--gp)}
 .visit-btn:hover::before{left:145%}
@@ -240,7 +243,7 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 
 .cta-content{position:relative;z-index:2;max-width:1100px;text-align:center}
 .cta-tag{display:inline-flex;align-items:center;gap:.8rem;padding:.6rem 1.8rem;border-radius:50px;margin-bottom:2.5rem;background:rgba(0,212,200,.07);border:1px solid rgba(0,212,200,.28);font-size:.76rem;letter-spacing:4px;color:var(--c2);animation:floatY 3.5s ease-in-out infinite;box-shadow:0 0 35px rgba(0,212,200,.1)}
-.cta-heading{font-family:'Montserrat';font-size:clamp(3rem,8vw,7.5rem);line-height:1.02;margin-bottom:1.5rem;letter-spacing:3px}
+.cta-heading{font-family:'Montserrat';font-size:clamp(3rem,8vw,70px);line-height:1.02;margin-bottom:1.5rem;letter-spacing:3px; font-weight: 900; text-transform: uppercase;}
 .gradient-text{background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradShift 6s ease infinite;filter:drop-shadow(0 0 35px rgba(0,212,200,.35))}
 @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .cta-description{font-size:1.2rem;line-height:1.95;color:rgba(238,238,255,.62);margin-bottom:4rem;max-width:600px;margin-left:auto;margin-right:auto}
@@ -254,12 +257,13 @@ nav.scrolled{background:rgba(4,4,20,.82);backdrop-filter:blur(28px);-webkit-back
 .contact-card:hover::before{opacity:1}
 .contact-card:hover::after{transform:scaleX(1)}
 .contact-icon{width:54px;height:54px;background:var(--g1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:.4rem;box-shadow:0 6px 24px var(--gp)}
-.contact-label{font-family:'Montserrat';font-size:.8rem;letter-spacing:3px;opacity:.46}
+.contact-label{font-family:'Montserrat';font-size:.8rem;opacity:.46; text-transform: uppercase; font-weight: 600;}
 .contact-value{font-size:1.02rem;font-weight:600}
 .contact-value a{color:#fff;text-decoration:none;transition:color .3s}
 .contact-value a:hover{color:var(--c2)}
 .cta-buttons{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
-.primary-cta{padding:1.4rem 3.8rem;background:var(--g1);color:#fff;text-decoration:none;font-family:'Montserrat';font-size:1.4rem;letter-spacing:3px;border-radius:50px;transition:all .3s;position:relative;overflow:hidden;border:none;cursor:none;box-shadow:0 6px 45px var(--gp),0 0 90px rgba(0,212,200,.12)}
+.primary-cta{display:inline-flex;align-items:center;gap:.7rem;padding:1.05rem 3rem;border-radius:8px;background:var(--g1);color:#fff;text-decoration:none; text-transform: uppercase;
+    font-weight: 600; font-family:'Montserrat';font-size:1rem;letter-spacing:2px;position:relative;overflow:hidden;box-shadow:0 6px 40px var(--gp),0 0 80px rgba(0,212,200,.15);transition:transform .3s,box-shadow .3s}
 .primary-cta::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .55s}
 .primary-cta:hover{transform:translateY(-5px) scale(1.04);box-shadow:0 14px 65px var(--gp),0 0 110px rgba(0,212,200,.22)}
 .primary-cta:hover::before{left:145%}
@@ -315,19 +319,19 @@ footer p{opacity:.35;font-size:.9rem;letter-spacing:1px}
 <nav id="mainNav">
   <div class="logo">&lt;ABDUL MOIZ/&gt;</div>
   <ul class="desktop-nav">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#home">Home</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#about">About</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#projects">Projects</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#contact">Contact</a></li>
   </ul>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 <div class="sidebar" id="sidebar">
   <ul class="nav-links">
-    <li><a href="#home" onclick="closeSidebar()">Home</a></li>
-    <li><a href="#about" onclick="closeSidebar()">About</a></li>
-    <li><a href="#projects" onclick="closeSidebar()">Projects</a></li>
-    <li><a href="#contact" onclick="closeSidebar()">Contact</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#home" onclick="closeSidebar()">Home</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#about" onclick="closeSidebar()">About</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#projects" onclick="closeSidebar()">Projects</a></li>
+    <li><a href="https://abdulmoiz-steel.vercel.app/#contact" onclick="closeSidebar()">Contact</a></li>
   </ul>
 </div>
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
@@ -343,8 +347,8 @@ footer p{opacity:.35;font-size:.9rem;letter-spacing:1px}
     <h1><span class="h-line1">HI, I AM</span><span class="h-line2">WEB DESIGNER &amp; DEVELOPER</span></h1>
     <p class="hero-sub"><span id="typewriter"></span></p>
     <div class="hero-btns">
-      <a href="#projects" class="btn-shine">View My Work</a>
-      <a href="#contact" class="btn-outline">Let's Talk</a>
+      <a href="https://abdulmoiz-steel.vercel.app/#projects" class="btn-shine">View My Work</a>
+      <a href="https://wa.link/c5503s" class="btn-outline">Let's Talk</a>
     </div>
   </div>
   <div class="scroll-arrow">
@@ -366,7 +370,7 @@ footer p{opacity:.35;font-size:.9rem;letter-spacing:1px}
       <p class="about-p2">I have worked with multiple companies across digital marketing, fashion, real estate, IT, security, and Amazon businesses. My expertise spans e-commerce, service sites, WordPress, Squarespace, Shopify, and custom HTML/CSS/JS/PHP — always focused on performance and results.</p>
       <div class="skills">
         <span class="skill-tag">WordPress</span><span class="skill-tag">Elementor</span><span class="skill-tag">Divi</span>
-        <span class="skill-tag">WPBakery</span><span class="skill-tag">Shopify</span><span class="skill-tag">Squarespace</span>
+        <span class="skill-tag">Shopify</span><span class="skill-tag">Squarespace</span>
         <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">PHP</span><span class="skill-tag">Javascript</span>
       </div>
     </div>
