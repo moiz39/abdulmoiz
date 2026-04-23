@@ -54,10 +54,26 @@
       overflow-x: hidden;
       max-width: 100%;
       line-height: 1.6;
-      cursor: none;
     }
 
     /* ══ CUSTOM CURSOR ══════════════════════════════════════ */
+
+    /* Hide default cursor globally */
+body, body * {
+  cursor: none !important;
+}
+
+/* But restore cursor for form inputs (UX requirement) */
+input, textarea, select, [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Ensure custom cursor is on top */
+#cur-dot, #cur-ring {
+  z-index: 99999;
+  pointer-events: none;
+  position: fixed;
+}
     #cur-dot {
       width: 6px;
       height: 6px;
