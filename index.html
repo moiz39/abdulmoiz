@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Abdul Moiz — Web Designer & Developer</title> 
+  <title>Abdul Moiz — Web Designer & Developer</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com"> 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,7 +113,6 @@
     .fc-lbl{font-size:.7rem;letter-spacing:2px;opacity:.5;margin-top:.1rem}
     .skills{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem}
     .skill-tag{padding:.5rem 1.3rem;background:rgba(123,79,212,.09);border:1px solid rgba(123,79,212,.28);border-radius:30px;font-size:.7rem;letter-spacing:1px;font-family:'Montserrat';cursor:default;transition:all .3s;position:relative;overflow:hidden;font-weight:700;text-transform:uppercase}
-    /* .skill-tag::before{content:'';position:absolute;inset:0;background:var(--g1);opacity:1;transition:opacity .3s} */
     .skill-tag:hover{border-color:var(--c2);box-shadow:0 0 22px rgba(0,212,200,.25);transform:translateY(-3px) scale(1.06)}
     .skill-tag:hover::before{opacity:.14}
 
@@ -130,7 +129,10 @@
     .tab-btn.active{background:var(--g1);border-color:transparent;color:#fff;box-shadow:0 4px 35px var(--gp),0 0 70px rgba(0,212,200,.15)}
     .tab-btn.active::before{opacity:0}
     .tab-count{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:.68rem;font-family:'Inter';font-weight:700;background:rgba(255,255,255,.22);margin-left:7px;position:relative;z-index:1}
-    .projects-container{margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2rem}
+
+    /* ── 4-COLUMN GRID (DESKTOP) ── */
+    .projects-container{margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;width:100%;max-width:1600px}
+
     .project-box{position:relative;background:rgba(255,255,255,.024);border:1px solid rgba(255,255,255,.07);border-radius:22px;overflow:hidden;transition:box-shadow .4s,border-color .4s;cursor:none;display:none;transform-style:preserve-3d}
     .project-box.visible{display:flex;flex-direction:column}
     .project-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(123,79,212,.08) 0%,rgba(0,212,200,.04) 100%);opacity:0;transition:opacity .4s;pointer-events:none}
@@ -165,7 +167,7 @@
 
     /* LOAD MORE */
     .load-more-wrap{display:flex;justify-content:center;margin-top:3.5rem;width:100%}
-    .load-more-btn{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2.8rem;border-radius:50px;border:1.5px solid rgba(0,212,200,.4);background:rgba(0,212,200,.06);color:var(--c2);font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .35s;box-shadow:0 0 25px rgba(0,212,200,.08)}
+    .load-more-btn{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2.8rem;border-radius:50px;border:1.5px solid rgba(0,212,200,.4);background:rgba(0,212,200,.06);color:var(--c2);font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .35s;box-shadow:0 0 25px rgba(0,212,200,.08);cursor:pointer}
     .load-more-btn:hover{border-color:var(--c2);background:rgba(0,212,200,.12);box-shadow:0 0 50px rgba(0,212,200,.25);transform:translateY(-4px) scale(1.03)}
     .load-more-btn svg{width:15px;height:15px;transition:transform .35s}
     .load-more-btn:hover svg{transform:translateY(4px)}
@@ -232,7 +234,16 @@
     /* PERFORMANCE */
     .projects-section,.cta-section{content-visibility:auto;contain-intrinsic-size:0 800px}
 
-    /* MOBILE */
+    /* RESPONSIVE BREAKPOINTS FOR GRID */
+    @media(max-width:1600px){
+      .projects-section{padding:8rem 3rem}
+    }
+    @media(max-width:1400px){
+      .projects-container{grid-template-columns:repeat(3,1fr)}
+    }
+    @media(max-width:1024px){
+      .projects-container{grid-template-columns:repeat(2,1fr)}
+    }
     @media(max-width:968px){
       body{cursor:auto}
       #cur-dot,#cur-ring{display:none}
@@ -248,7 +259,6 @@
       .about-img{width:100%}
       .float-card.f1,.float-card.f3{left:.5rem}
       .float-card.f2{right:.5rem}
-      .projects-container{grid-template-columns:1fr}
       .section-title{font-size:3.5rem}
       .projects-section,.about-section{padding:6rem 2rem}
       .contact-info{flex-direction:column;gap:1rem}
@@ -271,6 +281,7 @@
       .scroll-arrow{bottom:.2rem;left:0;right:0}
       .load-more-btn{padding:.9rem 1.8rem;font-size:.78rem;letter-spacing:1px}
       .load-more-wrap{margin-top:2.5rem}
+      .projects-container{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -431,7 +442,7 @@
 
   <script>
   /* ════════════════════════════════════════════════════════════════════════
-     PROJECTS DATA  — pure data, no GSAP dependency, safe to define now
+     PROJECTS DATA
      ════════════════════════════════════════════════════════════════════════ */
   const projects = [
     {name:"Elite Sports PK",             status:"active",   link:"https://elitesportspk.com/",                  img:"./image/1.webp"},
@@ -495,16 +506,14 @@
   ];
 
   /* ════════════════════════════════════════════════════════════════════════
-     BUILD CARDS  — pure DOM, runs immediately, zero GSAP dependency.
-     Cards get class "visible" straight away so they render on first paint
-     without waiting for GSAP to load.
+     BUILD CARDS
      ════════════════════════════════════════════════════════════════════════ */
   (function buildCards() {
     const container = document.getElementById('projectsContainer');
     projects.forEach((p, i) => {
       const hasLink = p.link && p.link !== '#';
       const box = document.createElement('div');
-      box.className   = 'project-box visible'; // visible from the start
+      box.className   = 'project-box visible';
       box.dataset.status = p.status;
       box.innerHTML = `
         <div class="project-number">${i + 1}</div>
@@ -536,14 +545,13 @@
       container.appendChild(box);
     });
 
-    // Tab counts — safe to update now (no GSAP)
     document.getElementById('count-all').textContent      = projects.length;
     document.getElementById('count-active').textContent   = projects.filter(p => p.status === 'active').length;
     document.getElementById('count-inactive').textContent = projects.filter(p => p.status === 'inactive').length;
   })();
 
   /* ════════════════════════════════════════════════════════════════════════
-     LIGHTBOX  — pure DOM + optional GSAP animations (gracefully degraded)
+     LIGHTBOX
      ════════════════════════════════════════════════════════════════════════ */
   (function initLightbox() {
     const lb    = document.getElementById('lightbox');
@@ -638,7 +646,6 @@
       if(e.key==='0') zoomTo(ZMN, innerWidth/2, innerHeight/2);
     });
 
-    // Wire up click-to-open on cards (already in DOM)
     document.querySelectorAll('.project-box').forEach((box, i) => {
       box.querySelector('.project-screenshot').addEventListener('click', e => {
         e.stopPropagation();
@@ -652,23 +659,26 @@
   })();
 
   /* ════════════════════════════════════════════════════════════════════════
-     TAB FILTER + LOAD MORE
-     Only 2 rows of cards are shown at a time; the "Show More" button
-     reveals 2 more rows. Works entirely without GSAP.
+     TAB FILTER + LOAD MORE  (4 columns x 2 rows shown initially)
      ════════════════════════════════════════════════════════════════════════ */
   let activeTab  = 'all';
-  let rowsToShow = 2;
+  let rowsToShow = 2;   // Always show 2 rows initially
 
-  function gridColumns() {
-    const cols = getComputedStyle(document.getElementById('projectsContainer')).gridTemplateColumns;
-    return Math.max(cols.split(' ').filter(v => v && v !== 'none').length, 1);
+  // Helper: Detect how many columns the current CSS grid has
+  function getGridColumns() {
+    const container = document.getElementById('projectsContainer');
+    const cols = window.getComputedStyle(container).gridTemplateColumns;
+    if (!cols || cols === 'none') return 4; // Fallback to 4
+    return cols.split(' ').length;
   }
 
   function applyFilter(animate = true) {
     const container = document.getElementById('projectsContainer');
     const boxes     = Array.from(container.querySelectorAll('.project-box'));
     const matched   = boxes.filter(b => activeTab === 'all' || b.dataset.status === activeTab);
-    const limit     = gridColumns() * rowsToShow;
+
+    const cols        = getGridColumns();
+    const itemsToShow = cols * rowsToShow; // e.g., 4 cols * 2 rows = 8 items
 
     const prevVisible = new Set(matched.filter(b => b.classList.contains('visible')));
     const newly = [];
@@ -676,7 +686,7 @@
 
     boxes.forEach(b => b.classList.remove('visible'));
     matched.forEach((b, i) => {
-      if (i >= limit) return;
+      if (i >= itemsToShow) return;
       if (!prevVisible.has(b)) newly.push(b);
       b.classList.add('visible');
       b.querySelector('.project-number').textContent = n++;
@@ -684,7 +694,7 @@
 
     const btn = document.getElementById('loadMoreBtn');
     if (btn) {
-      const remaining = matched.length - Math.min(limit, matched.length);
+      const remaining = matched.length - Math.min(itemsToShow, matched.length);
       btn.style.display = remaining > 0 ? 'inline-flex' : 'none';
       btn.querySelector('.lm-count').textContent = remaining > 0 ? `(${remaining})` : '';
     }
@@ -696,7 +706,7 @@
 
   function showTab(tab) {
     activeTab  = tab;
-    rowsToShow = 2;
+    rowsToShow = 2;   // Reset to 2 rows on tab change
     applyFilter();
   }
 
@@ -709,23 +719,24 @@
   });
 
   document.getElementById('loadMoreBtn').addEventListener('click', () => {
-    rowsToShow += 2;
+    rowsToShow += 2;   // Add 2 more rows
     applyFilter();
   });
 
-  /* keep row count correct on resize / rotate */
-  let rsT;
+  // Initial render — need a small delay to ensure CSS grid is computed
+  window.addEventListener('load', () => {
+    setTimeout(() => applyFilter(false), 50);
+  });
+  
+  // Handle window resize gracefully to keep exactly 2 rows visible
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    clearTimeout(rsT);
-    rsT = setTimeout(() => applyFilter(false), 150);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => applyFilter(false), 200);
   });
 
-  /* initial render — 2 rows only */
-  applyFilter(false);
-
   /* ════════════════════════════════════════════════════════════════════════
-     bootApp  — everything that STRICTLY REQUIRES GSAP lives here.
-     Runs only after the three deferred GSAP scripts have loaded.
+     bootApp — everything requiring GSAP
      ════════════════════════════════════════════════════════════════════════ */
   function bootApp() {
     gsap.registerPlugin(ScrollTrigger);
@@ -733,13 +744,11 @@
 
     const isMobile = window.innerWidth <= 968 || ('ontouchstart' in window);
 
-    /* Disable video on mobile */
     if(isMobile) {
       const vid = document.getElementById('heroVideo');
       if(vid){vid.pause();vid.removeAttribute('src');vid.load();}
     }
 
-    /* Particle canvas — desktop only */
     if(!isMobile) {
       const canvas = document.getElementById('bgCanvas');
       const ctx    = canvas.getContext('2d');
@@ -781,7 +790,6 @@
       document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else loop();});
     }
 
-    /* Custom cursor — desktop only */
     if(!isMobile) {
       const cDot  = document.getElementById('cur-dot');
       const cRing = document.getElementById('cur-ring');
@@ -795,7 +803,6 @@
       });
     }
 
-    /* 3D tilt on cards */
     document.querySelectorAll('.project-box').forEach(box=>{
       box.addEventListener('mousemove', e=>{
         const r=box.getBoundingClientRect();
@@ -806,7 +813,6 @@
       box.addEventListener('mouseleave',()=>gsap.to(box,{rotateY:0,rotateX:0,duration:.6,ease:'elastic.out(1,.75)'}));
     });
 
-    /* Hero cinematic entrance */
     gsap.timeline()
       .from('.logo',          {y:-80,opacity:0,duration:1,ease:'power3.out',delay:.15})
       .from('.desktop-nav li',{y:-40,opacity:0,duration:.8,stagger:.12,ease:'power3.out'},'-=.6')
@@ -817,7 +823,6 @@
       .from('.hero-btns',     {y:30,opacity:0,duration:.8,ease:'power3.out'},'-=.5')
       .from('.scroll-arrow',  {opacity:0,duration:1},'-=.2');
 
-    /* Scroll-triggered animations */
     const st=(t,s='top 72%')=>({trigger:t,start:s,toggleActions:'play none none reverse'});
     gsap.from('.section-badge', {scrollTrigger:st('.about-section'),y:20,opacity:0,duration:.6});
     gsap.from('.about-heading', {scrollTrigger:st('.about-section'),x:-100,opacity:0,duration:1,ease:'power3.out'});
@@ -831,18 +836,15 @@
     gsap.from('.ring',          {scrollTrigger:st('.cta-section'),scale:0,opacity:0,duration:1.8,stagger:.25,ease:'power2.out'});
     gsap.to('.video-background',{scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true},scale:1.1,y:90,opacity:.08});
 
-    /* Nav scroll state */
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
 
-    /* Smooth scroll for anchor links */
     document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
       e.preventDefault();
       const t=document.querySelector(a.getAttribute('href'));
       if(t) gsap.to(window,{duration:1.5,scrollTo:{y:t,offsetY:0},ease:'power3.inOut'});
     }));
 
-    /* Sidebar */
     const hb=document.getElementById('hamburger');
     const sb=document.getElementById('sidebar');
     const so=document.getElementById('sidebarOverlay');
@@ -853,9 +855,6 @@
     window.addEventListener('resize',()=>{if(innerWidth>968)closeSidebar();});
   }
 
-  /* ════════════════════════════════════════════════════════════════════════
-     Boot trigger — waits for deferred GSAP to finish loading
-     ════════════════════════════════════════════════════════════════════════ */
   if(typeof gsap !== 'undefined'){
     bootApp();
   } else {
