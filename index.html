@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -513,7 +513,7 @@
     projects.forEach((p, i) => {
       const hasLink = p.link && p.link !== '#';
       const box = document.createElement('div');
-      box.className   = 'project-box visible';
+      box.className   = 'project-box'; // Pehle hidden rahenge, applyFilter visible karega
       box.dataset.status = p.status;
       box.innerHTML = `
         <div class="project-number">${i + 1}</div>
@@ -723,10 +723,8 @@
     applyFilter();
   });
 
-  // Initial render — need a small delay to ensure CSS grid is computed
-  window.addEventListener('load', () => {
-    setTimeout(() => applyFilter(false), 50);
-  });
+  // Initial render — turant chalao taake FOUC (flash) na ho
+  requestAnimationFrame(() => applyFilter(false));
   
   // Handle window resize gracefully to keep exactly 2 rows visible
   let resizeTimer;
@@ -846,7 +844,7 @@
     }));
 
     const hb=document.getElementById('hamburger');
-    const sb=document.getElementById('sidebar');
+    const sb=document.getElementById('sidebar'); 
     const so=document.getElementById('sidebarOverlay');
     function closeSidebar(){hb.classList.remove('active');sb.classList.remove('open');so.classList.remove('active');document.body.style.overflow='';}
     function toggleSidebar(){hb.classList.toggle('active');sb.classList.toggle('open');so.classList.toggle('active');document.body.style.overflow=sb.classList.contains('open')?'hidden':'';}
