@@ -163,6 +163,14 @@
     .visit-btn.no-link{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.28);cursor:not-allowed;pointer-events:none;box-shadow:none}
     .visit-btn.no-link::before{display:none}
 
+    /* LOAD MORE */
+    .load-more-wrap{display:flex;justify-content:center;margin-top:3.5rem;width:100%}
+    .load-more-btn{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2.8rem;border-radius:50px;border:1.5px solid rgba(0,212,200,.4);background:rgba(0,212,200,.06);color:var(--c2);font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .35s;box-shadow:0 0 25px rgba(0,212,200,.08)}
+    .load-more-btn:hover{border-color:var(--c2);background:rgba(0,212,200,.12);box-shadow:0 0 50px rgba(0,212,200,.25);transform:translateY(-4px) scale(1.03)}
+    .load-more-btn svg{width:15px;height:15px;transition:transform .35s}
+    .load-more-btn:hover svg{transform:translateY(4px)}
+    .lm-count{font-size:.8rem;opacity:.55;letter-spacing:0}
+
     /* LIGHTBOX */
     .lightbox{position:fixed;inset:0;background:rgba(2,2,12,.97);z-index:10000;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .3s;cursor:none}
     .lightbox.active{opacity:1;pointer-events:auto}
@@ -261,6 +269,8 @@
       .about-section{padding:7rem 1.5rem}
       .about-img{height:400px}
       .scroll-arrow{bottom:.2rem;left:0;right:0}
+      .load-more-btn{padding:.9rem 1.8rem;font-size:.78rem;letter-spacing:1px}
+      .load-more-wrap{margin-top:2.5rem}
     }
   </style>
 </head>
@@ -353,6 +363,13 @@
       <button class="tab-btn" data-tab="inactive"><span>Inactive <span class="tab-count" id="count-inactive">0</span></span></button>
     </div>
     <div class="projects-container" id="projectsContainer"></div>
+    <div class="load-more-wrap">
+      <button class="load-more-btn" id="loadMoreBtn" type="button">
+        <span>Show More Projects</span>
+        <span class="lm-count"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
   </section>
 
   <!-- LIGHTBOX -->
@@ -423,9 +440,9 @@
     {name:"Eastern Drives and Patios",   status:"active",   link:"https://easterndrivesandpatios.co.uk//",      img:"./image/54.webp"},
     {name:"Tar Master Paving",           status:"active",   link:"https://tarmasterpaving.co.uk/",              img:"./image/55.webp"},
     {name:"Velour Skin Sciences",        status:"active",   link:"https://velourskinsciences.com/",             img:"./image/56.webp"},
-    {name:"Assured Trades Register",     status:"active",   link:"https://assuredtradesregister.co.uk/",        img:"./image/53.webp"},
     {name:"Cognito AI",                  status:"inactive", link:null,                                          img:"./image/46.webp"},
     {name:"The Taste Of Sages",          status:"active",   link:"https://sagesinternational.com/",             img:"./image/47.webp"},
+    {name:"Assured Trades Register",     status:"active",   link:"https://assuredtradesregister.co.uk/",        img:"./image/53.webp"},
     {name:"Softicera",                   status:"active",   link:"https://softicera.com/",                      img:"./image/4.webp"},
     {name:"Thumbsup Digital",            status:"active",   link:"https://thumbsupdigital.com/",                img:"./image/5.webp"},
     {name:"Mehrmas Pret",                status:"active",   link:"https://mehrmaspret.com/",                    img:"./image/2.webp"},
@@ -462,13 +479,12 @@
     {name:"All Island Management",       status:"active",   link:"https://allislandmanagement.com/",            img:"./image/52.webp"},
     // Inactive
     {name:"SAGES International",         status:"inactive", link:null, img:"./image/32.webp"},
-    {name:"Techeco Solutions LLC",       status:"inactive", link:null, img:"./image/33.webp"},
+    {name:"Techeco Solutions LLC",        status:"inactive", link:null, img:"./image/33.webp"},
     {name:"A Class Fencing",             status:"inactive", link:null, img:"./image/34.webp"},
-    {name:"PeptideX",                    status:"inactive", link:null, img:"./image/57.webp"},
-    {name:"Zenith Peptix",               status:"inactive", link:null, img:"./image/58.webp"},
+    {name:"PeptideX",        status:"inactive", link:null, img:"./image/57.webp"},
     {name:"Med Tech",                    status:"inactive", link:null, img:"./image/45.webp"},
     {name:"Digital Sparki",              status:"inactive", link:null, img:"./image/35.webp"},
-    {name:"Himalayan Top Water",         status:"inactive", link:null, img:"./image/36.webp"},
+    {name:"Himalayan Top Water",          status:"inactive", link:null, img:"./image/36.webp"},
     {name:"Sign Zons",                   status:"inactive", link:null, img:"./image/37.webp"},
     {name:"The Color Canvas",            status:"inactive", link:null, img:"./image/38.webp"},
     {name:"Dream Everest Garments",      status:"inactive", link:null, img:"./image/39.webp"},
@@ -636,25 +652,52 @@
   })();
 
   /* ════════════════════════════════════════════════════════════════════════
-     TAB FILTER  — GSAP animation is a progressive enhancement only.
-     Cards are always visible via CSS; animation runs if GSAP is ready.
+     TAB FILTER + LOAD MORE
+     Only 2 rows of cards are shown at a time; the "Show More" button
+     reveals 2 more rows. Works entirely without GSAP.
      ════════════════════════════════════════════════════════════════════════ */
-  function showTab(tab) {
+  let activeTab  = 'all';
+  let rowsToShow = 2;
+
+  function gridColumns() {
+    const cols = getComputedStyle(document.getElementById('projectsContainer')).gridTemplateColumns;
+    return Math.max(cols.split(' ').filter(v => v && v !== 'none').length, 1);
+  }
+
+  function applyFilter(animate = true) {
     const container = document.getElementById('projectsContainer');
-    const boxes = container.querySelectorAll('.project-box');
+    const boxes     = Array.from(container.querySelectorAll('.project-box'));
+    const matched   = boxes.filter(b => activeTab === 'all' || b.dataset.status === activeTab);
+    const limit     = gridColumns() * rowsToShow;
+
+    const prevVisible = new Set(matched.filter(b => b.classList.contains('visible')));
+    const newly = [];
     let n = 1;
-    boxes.forEach(b => {
-      const match = tab === 'all' || b.dataset.status === tab;
-      b.classList.toggle('visible', match);
-      if(match) b.querySelector('.project-number').textContent = n++;
+
+    boxes.forEach(b => b.classList.remove('visible'));
+    matched.forEach((b, i) => {
+      if (i >= limit) return;
+      if (!prevVisible.has(b)) newly.push(b);
+      b.classList.add('visible');
+      b.querySelector('.project-number').textContent = n++;
     });
-    if(typeof gsap !== 'undefined') {
-      gsap.fromTo(
-        container.querySelectorAll('.project-box.visible'),
-        {y:40, opacity:0},
-        {y:0, opacity:1, duration:.5, stagger:.04, ease:'power3.out'}
-      );
+
+    const btn = document.getElementById('loadMoreBtn');
+    if (btn) {
+      const remaining = matched.length - Math.min(limit, matched.length);
+      btn.style.display = remaining > 0 ? 'inline-flex' : 'none';
+      btn.querySelector('.lm-count').textContent = remaining > 0 ? `(${remaining})` : '';
     }
+
+    if (animate && newly.length && typeof gsap !== 'undefined') {
+      gsap.fromTo(newly, {y:40, opacity:0}, {y:0, opacity:1, duration:.5, stagger:.05, ease:'power3.out'});
+    }
+  }
+
+  function showTab(tab) {
+    activeTab  = tab;
+    rowsToShow = 2;
+    applyFilter();
   }
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -664,6 +707,21 @@
       showTab(btn.dataset.tab);
     });
   });
+
+  document.getElementById('loadMoreBtn').addEventListener('click', () => {
+    rowsToShow += 2;
+    applyFilter();
+  });
+
+  /* keep row count correct on resize / rotate */
+  let rsT;
+  window.addEventListener('resize', () => {
+    clearTimeout(rsT);
+    rsT = setTimeout(() => applyFilter(false), 150);
+  });
+
+  /* initial render — 2 rows only */
+  applyFilter(false);
 
   /* ════════════════════════════════════════════════════════════════════════
      bootApp  — everything that STRICTLY REQUIRES GSAP lives here.
